@@ -7,7 +7,7 @@ body, html {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-family: Arial, sans-serif;
+    font-family: 'Press Start 2P', cursive; /* Add pixelated font from Google Fonts */
 }
 
 /* Start screen styling */
@@ -41,14 +41,26 @@ body, html {
 
 /* Canvas (game area) styling */
 #canvas {
-    background-color: white;
-    border-radius: 50%;
+    background-color: black;
     box-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
 }
 
-/* Percentage text styling */
-#percentage {
-    color: white;
-    font-size: 24px;
+/* Pixelated percentage text styling */
+.percentage-text {
+    color: #fff600; /* Bright yellow color for the score */
+    font-size: 48px;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
     margin-top: 20px;
+    font-family: 'Press Start 2P', cursive; /* Pixelated font */
 }
+
+/* New best score text */
+.best-score-text {
+    color: white;
+    font-size: 20px;
+    margin-top: 10px;
+    font-family: 'Press Start 2P', cursive;
+}
+
+/* Google Fonts Pixelated font */
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
