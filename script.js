@@ -2,6 +2,7 @@ let canvas = document.getElementById('canvas');
 let ctx = canvas.getContext('2d');
 let isDrawing = false;
 let points = [];
+let bestScore = 0;
 
 // Start Game Function
 function startGame() {
@@ -31,12 +32,18 @@ canvas.addEventListener('mousemove', (event) => {
     points.push({ x: x, y: y });
 
     // Draw the line connecting the points
-    ctx.lineWidth = 2;
+    ctx.lineWidth = 5;
     ctx.lineJoin = 'round';
     ctx.lineCap = 'round';
-    ctx.strokeStyle = 'black';
 
+    // Gradient based on position
     if (points.length > 1) {
+        let gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+        gradient.addColorStop(0, 'green');
+        gradient.addColorStop(0.5, 'yellow');
+        gradient.addColorStop(1, 'red');
+
+        ctx.strokeStyle = gradient;
         ctx.beginPath();
         ctx.moveTo(points[points.length - 2].x, points[points.length - 2].y);
         ctx.lineTo(points[points.length - 1].x, points[points.length - 1].y);
@@ -80,5 +87,13 @@ function evaluateCircle() {
     score = Math.max(0, Math.min(100, score));  // Keep score between 0 and 100
 
     // Display the accuracy percentage
-    document.getElementById('percentage').innerText = `Circle accuracy: ${score.toFixed(2)}%`;
+    document.getElementById('percentage').innerText = `${score.toFixed(1)}%`;
+
+    // Check if it's a new best score
+    if (score > bestScore) {
+        bestScore = score;
+        document.getElementById('new-best').innerText = 'New best score';
+    } else {
+        document.getElementById('new-best').innerText = '';
+    }
 }
